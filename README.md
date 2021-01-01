@@ -40,7 +40,7 @@ sudo crontab -e
 Then enter line:
 
 ```
-@reboot /full/path/to/script/light_on_ping.py
+@reboot /full/path/to/script/light_on_nagios.py
 ```
 
 ### Challenges
@@ -49,9 +49,10 @@ Then enter line:
   Fixed this by changing a setting in `raspi-config`: under "system options", there's an option 
   "network at boot", to wait for a network connection to be established before proceeding.
 
-- My main challenge was a lot of false alarms. I thought this had to do with a weak WIFI signal 
-  when I closed the cigar box I'd made to enclose the project. Seems to have been fixed by 
-  using `ping response != 1` rather than `ping response == 0` as rule for success. 
+- I initially had used ping to check the status of the routers. 
+  (See [light_on_ping.py](https://github.com/karlduino/light_on_ping).)
+  But it was quite unreliable and I had already set up another pi running nagios, 
+  which led me to this approach.
 
 ### License
 
