@@ -74,6 +74,9 @@ def parse_nagios_file(nagios_file, host_names):
         while line:
             if 'hoststatus' in line:
                 line = filep.readline()
+
+                this_host = ''
+                this_status = ''
                 while line and '}' not in line:
                     if 'host_name=' in line:
                         this_host=get_value(line, '=')
@@ -82,7 +85,8 @@ def parse_nagios_file(nagios_file, host_names):
 
                     line = filep.readline()
 
-                host_status[this_host] = this_status	
+                if this_host != '':
+                    host_status[this_host] = this_status
 
             line = filep.readline() 
 	
