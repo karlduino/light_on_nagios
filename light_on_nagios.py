@@ -14,8 +14,8 @@ max_blink=30       # max time blinking (secs)
 
 # server/file info
 nagios_server = 'nagiospi.local'
-nagios_dir = '/usr/local/nagios/var'
-nagios_file = 'status.dat'
+nagios_dir = '/home/pi/nagios_data'
+nagios_file = 'status_subset.dat'
 local_dir = '/home/pi/nagios_data'
 
 # hosts to monitor

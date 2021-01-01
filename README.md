@@ -54,6 +54,15 @@ Then enter line:
   But it was quite unreliable and I had already set up another pi running nagios, 
   which led me to this approach.
 
+- The size of the status.dat file for nagios is rather large (36k), so I make a cron job on 
+  my nagios server that uses sed to subset to the key lines. The script is in 
+  [`subset_status.sh`](subset_status.sh). I have a cron job running on the nagios server to
+  do the subsetting once per minute.
+
+  ```
+  * * * * * /usr/local/bin/subset_status.sh
+  ```
+
 ### License
 
 Released under the [MIT license](LICENSE.md).
