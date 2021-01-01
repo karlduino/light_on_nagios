@@ -40,6 +40,18 @@ def parse_nagios_file(nagios_file, host_names):
     if not os.path.isfile(nagios_file): # if no file, assume they're all down
         return host_up
 
+    with open(nagios_file, 'r') as filep:
+        line = filep.readline()
+        while line:
+            if 'hoststatus' in line:
+                line = filep.readline()
+                while '}' not in line:
+                    if 'host_name=' in line or 'current_state=' in line:
+                        print(line)
+                    line = filep.readline()
+
+            line = filep.readline() 
+	
     return host_up
 
 
