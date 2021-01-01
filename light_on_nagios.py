@@ -34,9 +34,16 @@ def copy_nagios_file(server, server_dir, file, local_dir):
     # scp worked and file now exists
     return (scp_result==0 and os.path.isfile(local_path))
 
+def get_value(string, sep):
+    vec = string.strip().split(sep)
+    return vec[1]
+
 def parse_nagios_file(nagios_file, host_names):
     host_up = [False for name in host_names] 
-
+    host_status = {}
+    for host in host_names:
+        host_status[host] = '-1'
+   
     if not os.path.isfile(nagios_file): # if no file, assume they're all down
         return host_up
 
@@ -46,14 +53,18 @@ def parse_nagios_file(nagios_file, host_names):
             if 'hoststatus' in line:
                 line = filep.readline()
                 while '}' not in line:
-                    if 'host_name=' in line or 'current_state=' in line:
-                        print(line)
+                    if 'host_name=' in line:
+                        this_host=get_value(line, '=')
+                    if 'current_state=' in line:
+                        this_status=get_value(line, '=')
+
                     line = filep.readline()
+
+                host_status[this_host] = this_status	
 
             line = filep.readline() 
 	
-    return host_up
-
+    return [host_status[host]=='0' for host in host_names]
 
 
 # run the stuff
