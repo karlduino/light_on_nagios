@@ -19,7 +19,7 @@ nagios_file = 'status_subset.dat'
 local_dir = '/home/pi/nagios_data'
 
 # hosts to monitor
-hosts = ['main_router', 'tv_router', 'unfinished_router']
+hosts = ['main_router', 'livingroom_router', 'unfinished_router']
 
 # LED pins
 green1 = 25    # (pin 22 on old raspberry pi with 13x2 layout)
