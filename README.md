@@ -77,6 +77,18 @@ Then enter line:
   * * * * * /usr/local/bin/subset_status.sh
   ```
 
+- I've been having a problem where if the raspberry pi gets turned off
+  and on, the `light_on_nagios.py` script doesn't get re-started
+  properly. What works is killing the jobs running, and re-executing
+  the script in the background from the command line.
+
+  ```
+  ps aux | grep light
+  sudo kill [pid]
+  light_on_nagios/light_on_nagios.py &
+  ```
+
+
 ### License
 
 Released under the [MIT license](LICENSE.md).
